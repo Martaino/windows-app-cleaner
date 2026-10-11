@@ -1,0 +1,14 @@
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\bin\Debug\net10.0\WindowsBloatwareRemover.exe
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\bin\Debug\net10.0\WindowsBloatwareRemover.deps.json
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\bin\Debug\net10.0\WindowsBloatwareRemover.runtimeconfig.json
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\bin\Debug\net10.0\WindowsBloatwareRemover.dll
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\bin\Debug\net10.0\WindowsBloatwareRemover.pdb
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.AssemblyInfoInputs.cache
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.AssemblyInfo.cs
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.csproj.CoreCompileInputs.cache
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.dll
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\refint\WindowsBloatwareRemover.dll
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.pdb
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\WindowsBloatwareRemover.genruntimeconfig.cache
+C:\Users\marti\Documents\VS Code\WindowsBloatwareRemover\obj\Debug\net10.0\ref\WindowsBloatwareRemover.dll
