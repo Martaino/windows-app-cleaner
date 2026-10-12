@@ -1,15 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Dynamic;
 
-List<string> apps = new List<string> {
-    "Solitaire Collection",
-    "Xbox",
-    "Weather",
-    "Todos",
-    "Clipchamp"
-};
-
-List<bool> selected = Enumerable.Repeat(false, apps.Count).ToList();
+// Empty list of apps that holds all user apps
+List<App> apps = new List<App> {};
 
 while (true)
 {
@@ -21,7 +14,7 @@ while (true)
 
     string? choice = Console.ReadLine();
 
-    int len = apps.Count;
+    apps = await AppScanner.GetInstalledAppsAsync();
 
     if (choice == "1")
     {
@@ -31,9 +24,9 @@ while (true)
             // List out current apps
             Console.WriteLine("\nApplications:");
 
-            for (int i = 0; i < len; i++)
+            for (int i = 0; i < apps.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {apps[i]} {selected[i]}");
+                Console.WriteLine($"{i + 1}. {apps[i].Name} {apps[i].Selected}");
             }
 
             // Get user to pick which apps to remove
@@ -56,14 +49,14 @@ while (true)
             {
                 break;
             }
-            else if (selection < 1 || selection > len)
+            else if (selection < 1 || selection > apps.Count)
             {
                 Console.WriteLine("Invalid Input");
                 continue;
             }
             else
             {
-                selected[selection - 1] = !selected[selection - 1];
+                apps[selection - 1].Selected = !apps[selection - 1].Selected;
             } 
         }
     }
@@ -71,10 +64,9 @@ while (true)
     {
         for (int i = apps.Count - 1; i >= 0; i--)
         {
-            if (selected[i] == true)
+            if (apps[i].Selected == true)
             {
                 apps.RemoveAt(i);
-                selected.RemoveAt(i);
             }
         }
     }
@@ -87,11 +79,4 @@ while (true)
     {
         Console.WriteLine("Invalid option.");
     }
-}
-
-class App
-{
-    public string Name { get; init; } = "";
-    public string PackageName { get; init; } = "";
-    public bool Selected { get; set;}
 }

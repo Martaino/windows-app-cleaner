@@ -12,3 +12,4 @@ C:\Users\marti\Documents\VS Code\WindowsAppCleaner\obj\Debug\net10.0\refint\Wind
 C:\Users\marti\Documents\VS Code\WindowsAppCleaner\obj\Debug\net10.0\WindowsAppCleaner.pdb
 C:\Users\marti\Documents\VS Code\WindowsAppCleaner\obj\Debug\net10.0\WindowsAppCleaner.genruntimeconfig.cache
 C:\Users\marti\Documents\VS Code\WindowsAppCleaner\obj\Debug\net10.0\ref\WindowsAppCleaner.dll
+C:\Users\marti\Documents\VS Code\WindowsAppCleaner\obj\Debug\net10.0\WindowsAppCleaner.sourcelink.json
