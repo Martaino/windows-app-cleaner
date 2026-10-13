@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WindowsAppCleaner")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecc8ccd22922a17cd2443d399f4264fb9f292457")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+260abef64b5636e78d7bc05befd56ac91b5fa4ed")]
 [assembly: System.Reflection.AssemblyProductAttribute("WindowsAppCleaner")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WindowsAppCleaner")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

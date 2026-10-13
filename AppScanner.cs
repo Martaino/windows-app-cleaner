@@ -66,11 +66,6 @@ class AppScanner
 
                 Console.WriteLine($"Found {apps.Count} packages:");
 
-                foreach (App app in apps)
-                {
-                    Console.WriteLine(app.Name);
-                }
-
                 return apps;
             }            
         }

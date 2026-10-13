@@ -2,7 +2,7 @@
 using System.Dynamic;
 
 // Empty list of apps that holds all user apps
-List<App> apps = new List<App> {};
+List<App> apps = await AppScanner.GetInstalledAppsAsync();
 
 while (true)
 {
@@ -13,8 +13,6 @@ while (true)
     Console.Write("Choose an option: ");
 
     string? choice = Console.ReadLine();
-
-    apps = await AppScanner.GetInstalledAppsAsync();
 
     if (choice == "1")
     {
