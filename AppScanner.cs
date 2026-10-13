@@ -1,12 +1,45 @@
 using System.Diagnostics;
+using System.Text.Json;
 
 class AppScanner
 {
     public static async Task<List<App>> GetInstalledAppsAsync()
     {
-        // Find all the apps on the user pc and save it into apps list
+        // PowerShell script to retrieve applications
+        string script = """
+                # Get application in start menu
+                $startApps = @(Get-StartApps -ErrorAction Stop)
 
-        // get the info for powershell
+                # Get all installed AppX packages
+                $apps = @(
+
+                    Get-AppxPackage -ErrorAction Stop | ForEach-Object {
+                        $package = $_
+
+                        # Find the readable display name
+                        $displayName = $startApps | 
+                            Where-Object {
+                                $_.AppID -like "$($package.PackageFamilyName)!*"
+                            } | 
+                            Select-Object -First 1 -ExpandProperty Name
+
+                        # If the display name is empty then fall back to the package name
+                        if ([string]::IsNullOrWhiteSpace($displayName)) {
+                            $displayName = $package.Name
+                        }
+
+                        # Create an object with both the names to convert to JSON
+                        [PSCustomObject]@{
+                            Name = $displayName
+                            PackageName =$package.Name
+                        }
+                    }
+                )
+                
+                # Convert apps array into JSON
+                ConvertTo-Json -InputObject $apps -Depth 3 -Compress
+            """;
+
         ProcessStartInfo info = new ProcessStartInfo
         {
             FileName = "powershell.exe",
@@ -16,63 +49,44 @@ class AppScanner
             CreateNoWindow = true
         };
 
-        // list arguments being used in powershell
         info.ArgumentList.Add("-NoProfile");
         info.ArgumentList.Add("-NonInteractive");
         info.ArgumentList.Add("-Command");
-        info.ArgumentList.Add("Get-AppxPackage -ErrorAction Stop | Select-Object -ExpandProperty Name");
+        info.ArgumentList.Add(script);
 
-        // Start powershell and save all apps
         try
         {
-            // start powershell
-            using Process process = Process.Start(info) ?? throw new Exception("Could not start Powershell.");
+            using Process process = Process.Start(info)
+                ?? throw new Exception("Could not start PowerShell.");
 
-            // get the output and the error
-            Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
-            Task<string> errorTask = process.StandardError.ReadToEndAsync();
+            Task<string> outputTask =
+                process.StandardOutput.ReadToEndAsync();
+
+            Task<string> errorTask =
+                process.StandardError.ReadToEndAsync();
 
             await process.WaitForExitAsync();
 
             string output = await outputTask;
             string error = await errorTask;
 
-            // If scan didn't work then print errors, else get the info and save it into apps list
             if (process.ExitCode != 0)
             {
-                System.Console.WriteLine($"Scan Failed: {error}");
+                Console.WriteLine($"Scan failed: {error}");
                 return [];
             }
-            else
-            {
-                List<App> apps = [];
 
-                List<string> lines = output
-                    .Split('\n', StringSplitOptions.RemoveEmptyEntries)
-                    .Select(app => app.Trim())
-                    .Where(app => app.Length > 0)
-                    .ToList();
+            // Convert JSON into C# App objects
+            List<App> apps =
+                JsonSerializer.Deserialize<List<App>>(output) ?? [];
 
-                foreach (string name in lines)
-                {
-
-                    apps.Add(new App
-                    {
-                        Name = name,
-                        PackageName = name,
-                        Selected = false
-                    });
-                }
-
-                Console.WriteLine($"Found {apps.Count} packages:");
-
-                return apps;
-            }            
+            return apps;
         }
-        catch(Exception err)
+        catch (Exception err)
         {
-            System.Console.WriteLine($"Error: {err.Message}");
+            Console.WriteLine($"Error: {err.Message}");
             return [];
         }
     }
 }
+
